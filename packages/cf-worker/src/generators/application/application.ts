@@ -9,8 +9,8 @@ import {
   Tree,
 } from '@nrwl/devkit';
 import * as path from 'path';
-import { Schema } from './schema';
-import { NormaliseOptions, NormalisedSchema } from './lib/normaliseOptions';
+import { ApplicationSchema } from './schema';
+import { normaliseOptions, NormalisedSchema } from './lib/normaliseOptions';
 
 function addFiles(tree: Tree, options: NormalisedSchema) {
   const templateOptions = {
@@ -27,8 +27,11 @@ function addFiles(tree: Tree, options: NormalisedSchema) {
   );
 }
 
-export default async function applicationGenerator(tree: Tree, schema: Schema) {
-  const options = NormaliseOptions(tree, schema);
+export default async function applicationGenerator(
+  tree: Tree,
+  schema: ApplicationSchema
+) {
+  const options = normaliseOptions(tree, schema);
 
   addProjectConfiguration(tree, options.projectName, {
     root: options.projectRoot,
