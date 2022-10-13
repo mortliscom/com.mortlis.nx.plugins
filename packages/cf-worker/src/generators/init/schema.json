@@ -5,24 +5,27 @@
   "title": "",
   "type": "object",
   "properties": {
-    "name": {
+    "unitTestRunner": {
+      "description": "Adds the specified unit test runner.",
       "type": "string",
-      "description": "",
-      "$default": {
-        "$source": "argv",
-        "index": 0
-      },
-      "x-prompt": "What name would you like to use?"
+      "enum": ["jest", "none"],
+      "default": "jest"
     },
-    "tags": {
+    "e2eTestRunner": {
+      "description": "Adds the specified e2e test runner.",
       "type": "string",
-      "description": "Add tags to the project (used for linting)",
-      "alias": "t"
-    }, 
-    "directory": {
-      "type": "string",
-      "description": "A directory where the project is placed",
-      "alias": "d"
+      "enum": ["cypress", "none"],
+      "default": "cypress"
+    },
+    "skipFormat": {
+      "description": "Skip formatting files.",
+      "type": "boolean",
+      "default": false
+    },
+    "js": {
+      "type": "boolean",
+      "default": false,
+      "description": "Use JavaScript instead of TypeScript"
     }
   },
   "required": ["name"]
