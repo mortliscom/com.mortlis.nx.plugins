@@ -58,19 +58,19 @@ export default async function applicationGenerator(
   tree: Tree,
   options: Schema
 ) {
-  const normalizedOptions = normalizeOptions(tree, options);
-  addProjectConfiguration(tree, normalizedOptions.projectName, {
-    root: normalizedOptions.projectRoot,
+  const normalisedOptions = normaliseOptions(tree, options);
+  addProjectConfiguration(tree, normalisedOptions.projectName, {
+    root: normalisedOptions.projectRoot,
     projectType: 'application',
-    sourceRoot: `${normalizedOptions.projectRoot}/src`,
+    sourceRoot: `${normalisedOptions.projectRoot}/src`,
     targets: {
       build: {
         executor: '@com.mortlis.nx.plugins/cf-worker:build',
       },
     },
-    tags: normalizedOptions.parsedTags,
+    tags: normalisedOptions.parsedTags,
   });
-  addFiles(tree, normalizedOptions);
+  addFiles(tree, normalisedOptions);
   await formatFiles(tree);
 }
 
