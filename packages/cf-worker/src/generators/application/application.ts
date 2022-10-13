@@ -13,6 +13,7 @@ import { ApplicationSchema } from './schema';
 import { normaliseOptions, NormalisedSchema } from './lib/normaliseOptions';
 import { initGenerator } from '../init/init';
 import { addProject } from './lib/addProject';
+import { setDefaults } from './lib/setDefaults';
 
 function addFiles(tree: Tree, options: NormalisedSchema) {
   const templateOptions = {
@@ -38,6 +39,8 @@ export default async function applicationGenerator(
   const nextTask = initGenerator(host, { ...options });
 
   addProject(host, options);
+
+  setDefaults(host, options);
 
   await addProjectConfiguration(host, options.projectName, {
     root: options.projectRoot,
