@@ -6,18 +6,18 @@ import {
 } from '@nrwl/devkit';
 import { Linter } from '@nrwl/linter';
 
-import { Schema } from '../schema';
+import { ApplicationSchema } from '../schema';
 
-export interface NormalisedSchema extends Schema {
+export interface NormalisedSchema extends ApplicationSchema {
   projectName: string;
   projectRoot: string;
   projectDirectory: string;
   parsedTags: string[];
 }
 
-export function NormaliseOptions(
+export function normaliseOptions(
   host: Tree,
-  options: Schema
+  options: ApplicationSchema
 ): NormalisedSchema {
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
