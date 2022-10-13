@@ -1,0 +1,61 @@
+{
+  "name": "cf-worker",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/cf-worker/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/cf-worker",
+        "main": "packages/cf-worker/src/index.ts",
+        "tsConfig": "packages/cf-worker/tsconfig.lib.json",
+        "assets": [
+          "packages/cf-worker/*.md",
+          {
+            "input": "./packages/cf-worker/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/cf-worker/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/cf-worker",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/cf-worker",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "packages/cf-worker/**/*.ts",
+          "packages/cf-worker/generators.json",
+          "packages/cf-worker/executors.json",
+          "packages/cf-worker/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/cf-worker"],
+      "options": {
+        "jestConfig": "packages/cf-worker/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
