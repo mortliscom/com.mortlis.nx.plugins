@@ -4,7 +4,7 @@ import {
   eslintConfigNextVersion,
 } from '../../../utils/versions';
 
-function updateDependencies(host: Tree) {
+export function updateDependencies(host: Tree) {
   return addDependenciesToPackageJson(
     host,
     {
