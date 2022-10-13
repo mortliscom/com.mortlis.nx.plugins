@@ -32,6 +32,7 @@ export default async function applicationGenerator(
   options: Schema
 ) {
   const normalisedOptions = NormaliseOptions(tree, options);
+
   addProjectConfiguration(tree, normalisedOptions.projectName, {
     root: normalisedOptions.projectRoot,
     projectType: 'application',
