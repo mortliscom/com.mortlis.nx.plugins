@@ -1,4 +1,4 @@
-export interface Schema {
+export interface ApplicationSchema {
     name: string;
     tags?: string;
     directory?: string;
