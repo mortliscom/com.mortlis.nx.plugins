@@ -6,7 +6,9 @@
     "application": {
       "factory": "./src/generators/application/generator",
       "schema": "./src/generators/application/schema.json",
-      "description": "wrangler init for apps"
+      "alias": ["app"],
+      "x-type": "application",
+      "description": "Create a CF-Worker application."
     }
   }
 }
