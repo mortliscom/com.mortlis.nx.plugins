@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "generators": {
     "application": {
-      "factory": "./src/generators/application/application#applicationSchematic",
+      "factory": "./src/generators/application/application",
       "schema": "./src/generators/application/schema.json",
       "alias": ["app"],
       "x-type": "application",
