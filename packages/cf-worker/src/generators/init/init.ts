@@ -17,7 +17,7 @@ import { addGitIgnoreEntry } from '../../utils/addGitIgnoreEntry';
 
 interface NormalisedSchema extends InitSchema {}
 
-export async function InitGenerator(host: Tree, schema: InitSchema) {
+export async function initGenerator(host: Tree, schema: InitSchema) {
   const tasks: GeneratorCallback[] = [];
 
   const installTask = updateDependencies(host);
@@ -28,5 +28,5 @@ export async function InitGenerator(host: Tree, schema: InitSchema) {
   return runTasksInSerial(...tasks);
 }
 
-export default InitGenerator;
-export const InitSchematic = convertNxGenerator(InitGenerator);
+export default initGenerator;
+export const InitSchematic = convertNxGenerator(initGenerator);
