@@ -42,6 +42,10 @@ export default async function applicationGenerator(
 
   setDefaults(host, options);
 
+  if (!options.skipFormat) {
+    await formatFiles(host);
+  }
+
   await addProjectConfiguration(host, options.projectName, {
     root: options.projectRoot,
     projectType: 'application',
@@ -54,7 +58,6 @@ export default async function applicationGenerator(
     tags: options.parsedTags,
   });
   addFiles(host, options);
-  await formatFiles(host);
 }
 
 export const applicationSchematic = convertNxGenerator(applicationGenerator);
