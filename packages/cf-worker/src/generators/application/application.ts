@@ -11,6 +11,7 @@ import {
 import * as path from 'path';
 import { ApplicationSchema } from './schema';
 import { normaliseOptions, NormalisedSchema } from './lib/normaliseOptions';
+import { initGenerator } from '../init/init';
 
 function addFiles(tree: Tree, options: NormalisedSchema) {
   const templateOptions = {
@@ -28,12 +29,14 @@ function addFiles(tree: Tree, options: NormalisedSchema) {
 }
 
 export default async function applicationGenerator(
-  tree: Tree,
+  host: Tree,
   schema: ApplicationSchema
 ) {
-  const options = normaliseOptions(tree, schema);
+  const options = normaliseOptions(host, schema);
 
-  addProjectConfiguration(tree, options.projectName, {
+  const nextTask = initGenerator(host, { ...options });
+
+  await addProjectConfiguration(host, options.projectName, {
     root: options.projectRoot,
     projectType: 'application',
     sourceRoot: `${options.projectRoot}/src`,
@@ -44,8 +47,8 @@ export default async function applicationGenerator(
     },
     tags: options.parsedTags,
   });
-  addFiles(tree, options);
-  await formatFiles(tree);
+  addFiles(host, options);
+  await formatFiles(host);
 }
 
 export const applicationSchematic = convertNxGenerator(applicationGenerator);
