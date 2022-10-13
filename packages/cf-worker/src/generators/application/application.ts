@@ -12,7 +12,7 @@ import * as path from 'path';
 import { ApplicationSchema } from './schema';
 import { normaliseOptions, NormalisedSchema } from './lib/normaliseOptions';
 import { initGenerator } from '../init/init';
-import { addProjectCfg } from './lib/addProject';
+import { addProjectCfg } from './lib/addProjectCfg';
 import { setDefaults } from './lib/setDefaults';
 import { addFiles } from './lib/addFiles';
 
