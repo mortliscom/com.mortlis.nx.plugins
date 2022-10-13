@@ -6,7 +6,7 @@ import {
   Tree,
 } from '@nrwl/devkit';
 
-export function addProject(host: Tree, options: NormalisedSchema) {
+export function addProjectCfg(host: Tree, options: NormalisedSchema) {
   const targets: Record<string, any> = {};
 
   targets.build = {
@@ -53,7 +53,7 @@ export function addProject(host: Tree, options: NormalisedSchema) {
 
   const project: ProjectConfiguration = {
     root: options.projectRoot,
-    sourceRoot: options.projectRoot,
+    sourceRoot: `${options.projectRoot}/src`,
     projectType: 'application',
     targets,
     tags: options.parsedTags,
