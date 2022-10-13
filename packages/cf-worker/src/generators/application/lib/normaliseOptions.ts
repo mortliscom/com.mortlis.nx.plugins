@@ -15,7 +15,7 @@ export interface NormalisedSchema extends Schema {
   parsedTags: string[];
 }
 
-export function normaliseOptions(
+export function NormaliseOptions(
   host: Tree,
   options: Schema
 ): NormalisedSchema {
