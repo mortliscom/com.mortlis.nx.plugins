@@ -10,36 +10,9 @@ import {
 } from '@nrwl/devkit';
 import * as path from 'path';
 import { Schema } from './schema';
-import { normaliseOptions } from './lib/normaliseOptions';
+import { NormaliseOptions, NormalisedSchema } from './lib/normaliseOptions';
 
-interface NormalizedSchema extends Schema {
-  projectName: string;
-  projectRoot: string;
-  projectDirectory: string;
-  parsedTags: string[];
-}
-
-function normalizeOptions(tree: Tree, options: Schema): NormalizedSchema {
-  const name = names(options.name).fileName;
-  const projectDirectory = options.directory
-    ? `${names(options.directory).fileName}/${name}`
-    : name;
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectRoot = `${getWorkspaceLayout(tree).appsDir}/${projectDirectory}`;
-  const parsedTags = options.tags
-    ? options.tags.split(',').map((s) => s.trim())
-    : [];
-
-  return {
-    ...options,
-    projectName,
-    projectRoot,
-    projectDirectory,
-    parsedTags,
-  };
-}
-
-function addFiles(tree: Tree, options: NormalizedSchema) {
+function addFiles(tree: Tree, options: NormalisedSchema) {
   const templateOptions = {
     ...options,
     ...names(options.name),
@@ -58,7 +31,7 @@ export default async function applicationGenerator(
   tree: Tree,
   options: Schema
 ) {
-  const normalisedOptions = normaliseOptions(tree, options);
+  const normalisedOptions = NormaliseOptions(tree, options);
   addProjectConfiguration(tree, normalisedOptions.projectName, {
     root: normalisedOptions.projectRoot,
     projectType: 'application',
