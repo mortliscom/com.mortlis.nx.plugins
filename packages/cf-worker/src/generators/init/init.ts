@@ -3,23 +3,22 @@ import {
   convertNxGenerator,
   formatFiles,
   generateFiles,
+  GeneratorCallback,
   getWorkspaceLayout,
   names,
   offsetFromRoot,
   Tree,
 } from '@nrwl/devkit';
 import * as path from 'path';
-import { InitGeneratorSchema } from './schema';
+import { InitSchema } from './schema';
+import { updateDependencies } from './lib/updateDependencies';
 
-interface NormalizedSchema extends InitGeneratorSchema {
-  projectName: string;
-  projectRoot: string;
-  projectDirectory: string;
-  parsedTags: string[];
-}
+interface NormalizedSchema extends InitSchema {}
 
-export async function InitGenerator(tree: Tree, options: InitGeneratorSchema) {
-  await formatFiles(tree);
+export async function InitGenerator(host: Tree, schema: InitSchema) {
+  const tasks: GeneratorCallback[] = [];
+
+  const installTask = updateDependencies(host);
 }
 
 export default InitGenerator;
