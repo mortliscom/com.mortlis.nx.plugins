@@ -15,7 +15,6 @@ export interface NormalisedSchema extends Schema {
   e2eProjectRoot: string;
   parsedTags: string[];
   fileName: string;
-  styledModule: null | string;
   js?: boolean;
 }
 
@@ -45,15 +44,10 @@ export function normaliseOptions(
     ...options,
     name: names(options.name).fileName,
     projectName: appProjectName,
-    linter: options.linter || Linter.EsLint,
-    unitTestRunner: options.unitTestRunner || 'jest',
-    e2eTestRunner: options.e2eTestRunner || 'cypress',
-    style: options.style || 'css',
     appProjectRoot,
     e2eProjectRoot,
     e2eProjectName,
     parsedTags,
     fileName,
-    styledModule,
   };
 }
