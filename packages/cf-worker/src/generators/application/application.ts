@@ -8,6 +8,7 @@ import {
   offsetFromRoot,
   Tree,
 } from '@nrwl/devkit';
+import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import * as path from 'path';
 import { ApplicationSchema } from './schema';
 import { normaliseOptions, NormalisedSchema } from './lib/normaliseOptions';
@@ -22,7 +23,7 @@ export default async function applicationGenerator(
 ) {
   const options = normaliseOptions(host, schema);
 
-  const nextTask = initGenerator(host, { ...options });
+  const nextTask = await initGenerator(host, { ...options });
 
   addFiles(host, options);
 
@@ -33,6 +34,8 @@ export default async function applicationGenerator(
   if (!options.skipFormat) {
     await formatFiles(host);
   }
+
+  return runTasksInSerial(nextTask);
 }
 
 export const applicationSchematic = convertNxGenerator(applicationGenerator);
