@@ -23,7 +23,7 @@ export default async function applicationGenerator(
 ) {
   const options = normaliseOptions(host, schema);
 
-  const nextTask = await initGenerator(host, { ...options });
+  const initTask = await initGenerator(host, { ...options });
 
   addFiles(host, options);
 
@@ -35,7 +35,7 @@ export default async function applicationGenerator(
     await formatFiles(host);
   }
 
-  return runTasksInSerial(nextTask);
+  return runTasksInSerial(initTask);
 }
 
 export const applicationSchematic = convertNxGenerator(applicationGenerator);
