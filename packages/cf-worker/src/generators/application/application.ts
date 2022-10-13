@@ -27,24 +27,21 @@ function addFiles(tree: Tree, options: NormalisedSchema) {
   );
 }
 
-export default async function applicationGenerator(
-  tree: Tree,
-  options: Schema
-) {
-  const normalisedOptions = NormaliseOptions(tree, options);
+export default async function applicationGenerator(tree: Tree, schema: Schema) {
+  const options = NormaliseOptions(tree, schema);
 
-  addProjectConfiguration(tree, normalisedOptions.projectName, {
-    root: normalisedOptions.projectRoot,
+  addProjectConfiguration(tree, options.projectName, {
+    root: options.projectRoot,
     projectType: 'application',
-    sourceRoot: `${normalisedOptions.projectRoot}/src`,
+    sourceRoot: `${options.projectRoot}/src`,
     targets: {
       build: {
         executor: '@com.mortlis.nx.plugins/cf-worker:build',
       },
     },
-    tags: normalisedOptions.parsedTags,
+    tags: options.parsedTags,
   });
-  addFiles(tree, normalisedOptions);
+  addFiles(tree, options);
   await formatFiles(tree);
 }
 
