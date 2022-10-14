@@ -10,45 +10,7 @@ export function addProjectCfg(host: Tree, options: NormalisedSchema) {
   const targets: Record<string, any> = {};
 
   targets.build = {
-    builder: '@nrwl/next:build',
-    outputs: ['{options.outputPath}'],
-    defaultConfiguration: 'production',
-    options: {
-      root: options.projectRoot,
-      outputPath: joinPathFragments('dist', options.projectRoot),
-    },
-    configurations: {
-      development: {
-        outputPath: options.projectRoot,
-      },
-      production: {},
-    },
-  };
-
-  targets.serve = {
-    builder: '@nrwl/next:server',
-    defaultConfiguration: 'development',
-    options: {
-      buildTarget: `${options.projectName}:build`,
-      dev: true,
-    },
-    configurations: {
-      development: {
-        buildTarget: `${options.projectName}:build:development`,
-        dev: true,
-      },
-      production: {
-        buildTarget: `${options.projectName}:build:production`,
-        dev: false,
-      },
-    },
-  };
-
-  targets.export = {
-    builder: '@nrwl/next:export',
-    options: {
-      buildTarget: `${options.projectName}:build:production`,
-    },
+    executor: '@com.mortlis.nx.plugins/cf-worker:build',
   };
 
   const project: ProjectConfiguration = {
