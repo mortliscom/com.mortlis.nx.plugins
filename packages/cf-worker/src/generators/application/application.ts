@@ -16,6 +16,7 @@ import { initGenerator } from '../init/init';
 import { addProjectCfg } from './lib/addProjectCfg';
 import { setDefaults } from './lib/setDefaults';
 import { addFiles } from './lib/addFiles';
+import { wranglerInit } from './lib/wranglerInit';
 
 export default async function applicationGenerator(
   host: Tree,
@@ -34,6 +35,8 @@ export default async function applicationGenerator(
   if (!options.skipFormat) {
     await formatFiles(host);
   }
+
+  wranglerInit(host, options);
 
   return runTasksInSerial(initTask);
 }
