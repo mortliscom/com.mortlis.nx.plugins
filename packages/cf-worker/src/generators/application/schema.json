@@ -14,6 +14,27 @@
       },
       "x-prompt": "What name would you like to use?"
     },
+    "template": {
+      "description": "The template to be used.",
+      "type": "string",
+      "default": "fetch-handler",
+      "alias": "s",
+      "x-prompt": {
+        "message": "Which template would you like to use?",
+        "type": "list",
+        "items": [
+          { "value": "none", "label": "Empty worker file." },
+          {
+            "value": "fetch-handler",
+            "label": "Preconfigured worker as a fetch-handler."
+          },
+          {
+            "value": "scheduled-handler",
+            "label": "Preconfigured worker as a scheduled-handler."
+          }
+        ]
+      }
+    },
     "tags": {
       "type": "string",
       "description": "Add tags to the project (used for linting)",
