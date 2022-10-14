@@ -11,7 +11,7 @@ export function addFiles(tree: Tree, options: NormalisedSchema) {
   };
   generateFiles(
     tree,
-    path.join(__dirname, 'files'),
+    path.join(__dirname, '../files'),
     options.projectRoot,
     templateOptions
   );
