@@ -1,4 +1,10 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "executors": {}
+  "executors": {
+    "server": {
+      "implementation": "./src/executors/server/executor",
+      "schema": "./src/executors/server/schema.json",
+      "description": "Create a development server."
+    }
+  }
 }
