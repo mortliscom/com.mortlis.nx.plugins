@@ -1,69 +1,28 @@
 import {
   addProjectConfiguration,
+  convertNxGenerator,
   formatFiles,
   generateFiles,
+  GeneratorCallback,
   getWorkspaceLayout,
   names,
   offsetFromRoot,
   Tree,
 } from '@nrwl/devkit';
 import * as path from 'path';
+import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { addGitIgnoreEntry } from './lib/addGitIgnoreEntry';
+import { updateDependencies } from './lib/updateDependencies';
 import { InitGeneratorSchema } from './schema';
 
-interface NormalizedSchema extends InitGeneratorSchema {
-  projectName: string;
-  projectRoot: string;
-  projectDirectory: string;
-  parsedTags: string[];
-}
+export async function initGenerator(tree: Tree, options: InitGeneratorSchema) {
+  const tasks: GeneratorCallback[] = [];
 
-function normalizeOptions(tree: Tree, options: InitGeneratorSchema): NormalizedSchema {
-  const name = names(options.name).fileName;
-  const projectDirectory = options.directory
-    ? `${names(options.directory).fileName}/${name}`
-    : name;
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}`;
-  const parsedTags = options.tags
-    ? options.tags.split(',').map((s) => s.trim())
-    : [];
+  const installTask = updateDependencies(tree);
+  tasks.push(installTask);
 
-  return {
-    ...options,
-    projectName,
-    projectRoot,
-    projectDirectory,
-    parsedTags,
-  };
-}
+  addGitIgnoreEntry(tree);
 
-function addFiles(tree: Tree, options: NormalizedSchema) {
-    const templateOptions = {
-      ...options,
-      ...names(options.name),
-      offsetFromRoot: offsetFromRoot(options.projectRoot),
-      template: ''
-    };
-    generateFiles(tree, path.join(__dirname, 'files'), options.projectRoot, templateOptions);
+  return runTasksInSerial(...tasks);
 }
-
-export default async function (tree: Tree, options: InitGeneratorSchema) {
-  const normalizedOptions = normalizeOptions(tree, options);
-  addProjectConfiguration(
-    tree,
-    normalizedOptions.projectName,
-    {
-      root: normalizedOptions.projectRoot,
-      projectType: 'library',
-      sourceRoot: `${normalizedOptions.projectRoot}/src`,
-      targets: {
-        build: {
-          executor: "@com.mortlis.nx.plugins/cf-worker:build",
-        },
-      },
-      tags: normalizedOptions.parsedTags,
-    }
-  );
-  addFiles(tree, normalizedOptions);
-  await formatFiles(tree);
-}
+export default initGenerator;

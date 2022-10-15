@@ -8,8 +8,8 @@ import { NormalisedSchema } from '../typings/NormalisedSchema';
 export function projectConfiguration(tree: Tree, options: NormalisedSchema) {
   const targets: Record<string, any> = {};
 
-  targets.serve = {
-    executor: '@com.mortlis.nx.plugins/cf-worker:server',
+  targets.build = {
+    executor: '@com.mortlis.nx.plugins/cf-worker:build',
   };
 
   const project: ProjectConfiguration = {

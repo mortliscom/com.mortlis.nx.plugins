@@ -24,7 +24,7 @@
     }
   },
   "workspaceLayout": {
-    "appsDir": "e2e",
+    "appsDir": "packages",
     "libsDir": "packages"
   }
 }
