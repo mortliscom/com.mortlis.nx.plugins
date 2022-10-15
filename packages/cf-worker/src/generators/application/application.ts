@@ -19,8 +19,8 @@ export async function applicationGenerator(
   options: ApplicationGeneratorSchema
 ) {
   const normalisedOptions = normaliseOptions(tree, options);
-  //projectConfiguration(tree, normalisedOptions);
-  //addFiles(tree, normalisedOptions);
+  projectConfiguration(tree, normalisedOptions);
+  addFiles(tree, normalisedOptions);
   await formatFiles(tree);
 }
 export const applicationSchematic = convertNxGenerator(applicationGenerator);
