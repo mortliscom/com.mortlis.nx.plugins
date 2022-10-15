@@ -1,4 +1,4 @@
-export const nxVersion = require('../../../../../../package.json').version;
+//export const nxVersion = require('../../../../../../package.json').version;
 
 export const nextVersion = '12.3.1';
 export const wranglerVersion = '2.1.11';
