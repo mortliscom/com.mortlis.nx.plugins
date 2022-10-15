@@ -13,6 +13,25 @@ export function addProjectCfg(host: Tree, options: NormalisedSchema) {
     executor: '@com.mortlis.nx.plugins/cf-worker:build',
   };
 
+  targets.serve = {
+    builder: '@com.mortlis.nx.plugins/cf-worker:dev',
+    defaultConfiguration: 'development',
+    options: {
+      buildTarget: `${options.projectName}:build`,
+      dev: true,
+    },
+    configurations: {
+      development: {
+        buildTarget: `${options.projectName}:build:development`,
+        dev: true,
+      },
+      production: {
+        buildTarget: `${options.projectName}:build:production`,
+        dev: false,
+      },
+    },
+  };
+
   const project: ProjectConfiguration = {
     root: options.projectRoot,
     sourceRoot: `${options.projectRoot}/src`,
