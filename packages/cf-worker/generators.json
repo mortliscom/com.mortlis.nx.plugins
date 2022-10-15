@@ -6,9 +6,16 @@
     "application": {
       "factory": "./src/generators/application/application",
       "schema": "./src/generators/application/schema.json",
-      "alias": ["app"],
+      "alias": [
+        "app"
+      ],
       "x-type": "application",
       "description": "Create a new Cloudflare Worker application."
+    },
+    "init": {
+      "factory": "./src/generators/init/generator",
+      "schema": "./src/generators/init/schema.json",
+      "description": "Initialise the @mortliscom/cf-worker plugin."
     }
   }
 }
