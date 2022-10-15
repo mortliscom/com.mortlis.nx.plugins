@@ -3,13 +3,8 @@
   "name": "cf-worker",
   "version": "0.0.1",
   "generators": {
-    "cf-worker": {
-      "factory": "./src/generators/cf-worker/generator",
-      "schema": "./src/generators/cf-worker/schema.json",
-      "description": "cf-worker generator"
-    },
     "application": {
-      "factory": "./src/generators/application/generator",
+      "factory": "./src/generators/application/application",
       "schema": "./src/generators/application/schema.json",
       "description": "Create a new Cloudflare Worker application."
     }
