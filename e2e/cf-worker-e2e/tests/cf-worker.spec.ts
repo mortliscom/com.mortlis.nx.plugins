@@ -42,7 +42,7 @@ describe('cf-worker e2e', () => {
         `generate @com.mortlis.nx.plugins/cf-worker:cf-worker ${project} --directory subdir`
       );
       expect(() =>
-        checkFilesExist(`libs/subdir/${project}/src/index.ts`)
+        checkFilesExist(`apps/subdir/${project}/src/index.ts`)
       ).not.toThrow();
     }, 120000);
   });
@@ -57,7 +57,7 @@ describe('cf-worker e2e', () => {
       await runNxCommandAsync(
         `generate @com.mortlis.nx.plugins/cf-worker:cf-worker ${projectName} --tags e2etag,e2ePackage`
       );
-      const project = readJson(`libs/${projectName}/project.json`);
+      const project = readJson(`apps/${projectName}/project.json`);
       expect(project.tags).toEqual(['e2etag', 'e2ePackage']);
     }, 120000);
   });
