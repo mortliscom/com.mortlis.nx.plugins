@@ -2,6 +2,7 @@ import { addDependenciesToPackageJson, Tree } from '@nrwl/devkit';
 import {
   wranglerVersion,
   eslintConfigNextVersion,
+  cloudflareWorkersTypes,
 } from '../../../utils/versions';
 
 export function updateDependencies(host: Tree) {
@@ -9,6 +10,7 @@ export function updateDependencies(host: Tree) {
     host,
     {
       wrangler: wranglerVersion,
+      '@cloudflare/workers-types': cloudflareWorkersTypes,
     },
     {
       'eslint-config-next': eslintConfigNextVersion,
