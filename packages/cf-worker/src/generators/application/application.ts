@@ -1,5 +1,6 @@
 import {
   addProjectConfiguration,
+  convertNxGenerator,
   formatFiles,
   generateFiles,
   getWorkspaceLayout,
@@ -8,27 +9,18 @@ import {
   Tree,
 } from '@nrwl/devkit';
 import * as path from 'path';
-import { ApplicationGeneratorSchema } from './schema';
+import { addFiles } from './lib/addFiles';
 import { normaliseOptions } from './lib/normaliseOptions';
 import { projectConfiguration } from './lib/projectConfiguration';
-import { addFiles } from './lib/addFiles';
+import { ApplicationGeneratorSchema } from './schema';
 
-interface NormalizedSchema extends ApplicationGeneratorSchema {
-  projectName: string;
-  projectRoot: string;
-  projectDirectory: string;
-  parsedTags: string[];
-}
-
-export default async function (
+export async function applicationGenerator(
   tree: Tree,
   options: ApplicationGeneratorSchema
 ) {
   const normalisedOptions = normaliseOptions(tree, options);
-
-  projectConfiguration(tree, normalisedOptions);
-
-  addFiles(tree, normalisedOptions);
-  
+  //projectConfiguration(tree, normalisedOptions);
+  //addFiles(tree, normalisedOptions);
   await formatFiles(tree);
 }
+export const applicationSchematic = convertNxGenerator(applicationGenerator);
