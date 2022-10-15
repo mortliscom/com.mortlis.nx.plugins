@@ -9,7 +9,7 @@ export function projectConfiguration(tree: Tree, options: NormalisedSchema) {
   const targets: Record<string, any> = {};
 
   targets.serve = {
-    executor: '@com.mortlis.nx.plugins/cf-worker:build',
+    executor: '@com.mortlis.nx.plugins/cf-worker:server',
   };
 
   const project: ProjectConfiguration = {
