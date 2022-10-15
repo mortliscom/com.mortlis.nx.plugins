@@ -14,13 +14,13 @@ export function setDefaults(host: Tree, options: NormalisedSchema) {
   }
 
   workspace.generators = workspace.generators || {};
-  workspace.generators['@mortliscom/cf-worker'] =
-    workspace.generators['@mortliscom/cf-worker'] || {};
-  const prev = workspace.generators['@mortliscom/cf-worker'];
+  workspace.generators['@com.mortlis.nx.plugins/cf-worker'] =
+    workspace.generators['@com.mortlis.nx.plugins/cf-worker'] || {};
+  const prev = workspace.generators['@com.mortlis.nx.plugins/cf-worker'];
 
   workspace.generators = {
     ...workspace.generators,
-    '@mortliscom/cf-worker': {
+    '@com.mortlis.nx.plugins/cf-worker': {
       ...prev,
       application: {
         ...prev.application,

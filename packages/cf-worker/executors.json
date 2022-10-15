@@ -5,6 +5,11 @@
       "implementation": "./src/executors/server/executor",
       "schema": "./src/executors/server/schema.json",
       "description": "Create a development server."
+    },
+    "build": {
+      "implementation": "./src/executors/build/executor",
+      "schema": "./src/executors/build/schema.json",
+      "description": "build executor"
     }
   }
 }
