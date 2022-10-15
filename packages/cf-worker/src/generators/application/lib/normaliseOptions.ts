@@ -28,6 +28,7 @@ export function normaliseOptions(
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
+  const template = options.template ? options.template : 'fetch-handler';
 
   return {
     ...options,
@@ -35,5 +36,6 @@ export function normaliseOptions(
     projectRoot,
     projectDirectory,
     parsedTags,
+    template,
   };
 }
