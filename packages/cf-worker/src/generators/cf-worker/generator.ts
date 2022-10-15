@@ -8,16 +8,19 @@ import {
   Tree,
 } from '@nrwl/devkit';
 import * as path from 'path';
-import { InitGeneratorSchema } from './schema';
+import { CfWorkerGeneratorSchema } from './schema';
 
-interface NormalizedSchema extends InitGeneratorSchema {
+interface NormalizedSchema extends CfWorkerGeneratorSchema {
   projectName: string;
   projectRoot: string;
   projectDirectory: string;
   parsedTags: string[];
 }
 
-function normalizeOptions(tree: Tree, options: InitGeneratorSchema): NormalizedSchema {
+function normalizeOptions(
+  tree: Tree,
+  options: CfWorkerGeneratorSchema
+): NormalizedSchema {
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${name}`
@@ -38,32 +41,33 @@ function normalizeOptions(tree: Tree, options: InitGeneratorSchema): NormalizedS
 }
 
 function addFiles(tree: Tree, options: NormalizedSchema) {
-    const templateOptions = {
-      ...options,
-      ...names(options.name),
-      offsetFromRoot: offsetFromRoot(options.projectRoot),
-      template: ''
-    };
-    generateFiles(tree, path.join(__dirname, 'files'), options.projectRoot, templateOptions);
+  const templateOptions = {
+    ...options,
+    ...names(options.name),
+    offsetFromRoot: offsetFromRoot(options.projectRoot),
+    template: '',
+  };
+  generateFiles(
+    tree,
+    path.join(__dirname, 'files'),
+    options.projectRoot,
+    templateOptions
+  );
 }
 
-export default async function (tree: Tree, options: InitGeneratorSchema) {
+export default async function (tree: Tree, options: CfWorkerGeneratorSchema) {
   const normalizedOptions = normalizeOptions(tree, options);
-  addProjectConfiguration(
-    tree,
-    normalizedOptions.projectName,
-    {
-      root: normalizedOptions.projectRoot,
-      projectType: 'library',
-      sourceRoot: `${normalizedOptions.projectRoot}/src`,
-      targets: {
-        build: {
-          executor: "@com.mortlis.nx.plugins/cf-worker:build",
-        },
+  addProjectConfiguration(tree, normalizedOptions.projectName, {
+    root: normalizedOptions.projectRoot,
+    projectType: 'library',
+    sourceRoot: `${normalizedOptions.projectRoot}/src`,
+    targets: {
+      build: {
+        executor: '@com.mortlis.nx.plugins/cf-worker:build',
       },
-      tags: normalizedOptions.parsedTags,
-    }
-  );
+    },
+    tags: normalizedOptions.parsedTags,
+  });
   addFiles(tree, normalizedOptions);
   await formatFiles(tree);
 }

@@ -1,12 +1,12 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { Tree, readProjectConfiguration } from '@nrwl/devkit';
 
-import generator from './application';
-import { ApplicationGeneratorSchema } from './schema';
+import generator from './generator';
+import { CfWorkerGeneratorSchema } from './schema';
 
-describe('application generator', () => {
+describe('cf-worker generator', () => {
   let appTree: Tree;
-  const options: ApplicationGeneratorSchema = { name: 'test' };
+  const options: CfWorkerGeneratorSchema = { name: 'test' };
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();

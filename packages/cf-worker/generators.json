@@ -3,19 +3,10 @@
   "name": "cf-worker",
   "version": "0.0.1",
   "generators": {
-    "application": {
-      "factory": "./src/generators/application/application",
-      "schema": "./src/generators/application/schema.json",
-      "alias": [
-        "app"
-      ],
-      "x-type": "application",
-      "description": "Create a new Cloudflare Worker application."
-    },
-    "init": {
-      "factory": "./src/generators/init/generator",
-      "schema": "./src/generators/init/schema.json",
-      "description": "Initialise the @mortliscom/cf-worker plugin."
+    "cf-worker": {
+      "factory": "./src/generators/cf-worker/generator",
+      "schema": "./src/generators/cf-worker/schema.json",
+      "description": "cf-worker generator"
     }
   }
 }
