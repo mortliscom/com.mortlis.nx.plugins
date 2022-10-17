@@ -24,10 +24,10 @@ export default async function (
   console.log(normalisedOptions);
   const initTask = await initGenerator(tree, { ...normalisedOptions });
 
-  initWrangler(tree, normalisedOptions);
-
   projectConfiguration(tree, normalisedOptions);
   addFiles(tree, normalisedOptions);
+
+  initWrangler(tree, normalisedOptions);
   await formatFiles(tree);
 
   return runTasksInSerial(initTask);
